@@ -2,12 +2,6 @@ import React from 'react';
 import Grade from './Grade';
 
 class GradeTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      grades: this.props.grades
-    };
-  }
 
   generateGradeRows() {
     const gradesList = this.props.grades;
