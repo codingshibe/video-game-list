@@ -21,11 +21,25 @@ class App extends React.Component {
       });
   }
 
+  calculateAverage() {
+    if (this.state.grades.length !== 0) {
+      const grades = this.state.grades;
+      let total = 0;
+      for (let i = 0; i < grades.length; i++) {
+        total += grades[i].grade;
+      }
+      return total / grades.length;
+    }
+    return 0;
+  }
+
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <GradeTable grades={this.state.grades} />
+        <div className='container'>
+          <Header average={this.calculateAverage()}/>
+          <GradeTable grades={this.state.grades} />
+        </div>
       </React.Fragment>
     );
   }
