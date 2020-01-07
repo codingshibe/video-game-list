@@ -45,7 +45,7 @@ class GradeForm extends React.Component {
     const course = this.state.course;
     const grade = this.state.grade;
     return (
-      <div>
+      <form onSubmit={this.handleClick} onReset={this.resetFormFields}>
         <div className='input-group mb-3'>
           <div className='input-group-prepend'>
             <span className='input-group-text'>
@@ -70,9 +70,9 @@ class GradeForm extends React.Component {
           </div>
           <input type='number' className='form-control' value={grade} placeholder='Grade' onChange={this.handleGradeInput}></input>
         </div>
-        <button type='submit' className='btn btn-success' id='addButton' onClick={this.handleClick}>Add</button>
-        <button type='button' className='btn btn-light' id='cancelButton' onClick={this.resetFormFields}>Cancel</button>
-      </div>
+        <button type='submit' className='btn btn-success' id='addButton'>Add</button>
+        <button type='button' className='btn btn-light' id='cancelButton'>Cancel</button>
+      </form>
     );
   }
 }
