@@ -7,6 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { grades: [] };
+    this.postToSGT = this.postToSGT.bind(this);
   }
 
   componentDidMount() {
@@ -34,11 +35,10 @@ class App extends React.Component {
     return 0;
   }
 
-  postToSGT() {
-    const newEntry = this.props.studentInfo;
+  postToSGT(newStudent) {
     const config = {
       method: 'POST',
-      body: JSON.stringify(newEntry),
+      body: JSON.stringify(newStudent),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -48,7 +48,10 @@ class App extends React.Component {
         return data.json();
       })
       .then(data => {
-        console.log(data);
+        const currentData = [...this.state.grades];
+        currentData.push(data);
+        this.setState({ grades: currentData });
+
       })
       .catch(err => {
         console.error(err);
@@ -70,7 +73,7 @@ class App extends React.Component {
               <GradeTable grades={this.state.grades} />
             </div>
             <div className='col-md-3'>
-              <GradeForm />
+              <GradeForm onSubmit={this.postToSGT}/>
             </div>
 
           </div>
