@@ -12,6 +12,7 @@ class GradeForm extends React.Component {
     this.handleNameInput = this.handleNameInput.bind(this);
     this.handleCourseInput = this.handleCourseInput.bind(this);
     this.handleGradeInput = this.handleGradeInput.bind(this);
+    this.resetFormFields = this.resetFormFields.bind(this);
   }
 
   handleNameInput(event) {
@@ -24,6 +25,15 @@ class GradeForm extends React.Component {
 
   handleGradeInput(event) {
     this.setState({ grade: event.target.value });
+  }
+
+  resetFormFields(event) {
+    const formFields = document.querySelectorAll('.form-control');
+    for (let i = 0; i < formFields.length; i++) {
+      formFields[i].value = '';
+    }
+
+    this.setState({ name: '', course: '', grade: '' });
   }
 
   render() {
@@ -54,7 +64,7 @@ class GradeForm extends React.Component {
           <input type='number' className='form-control' placeholder='Grade' onChange={this.handleGradeInput}></input>
         </div>
         <button type='submit' className='btn btn-success' id='addButton'>Add</button>
-        <button type='button' className='btn btn-light' id='cancelButton'>Cancel</button>
+        <button type='button' className='btn btn-light' id='cancelButton' onClick={this.resetFormFields}>Cancel</button>
       </div>
     );
   }
