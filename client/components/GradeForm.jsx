@@ -37,15 +37,13 @@ class GradeForm extends React.Component {
   }
 
   resetFormFields(event) {
-    const formFields = document.querySelectorAll('.form-control');
-    for (let i = 0; i < formFields.length; i++) {
-      formFields[i].value = '';
-    }
-
     this.setState({ name: '', course: '', grade: '' });
   }
 
   render() {
+    const name = this.state.name;
+    const course = this.state.course;
+    const grade = this.state.grade;
     return (
       <div>
         <div className='input-group mb-3'>
@@ -54,7 +52,7 @@ class GradeForm extends React.Component {
               <i className='fas fa-user' />
             </span>
           </div>
-          <input type='text' className='form-control' placeholder='Student Name' onChange={this.handleNameInput}></input>
+          <input type='text' className='form-control' placeholder='Student Name' value={name}onChange={this.handleNameInput}></input>
         </div>
         <div className='input-group mb-3'>
           <div className='input-group-prepend'>
@@ -62,7 +60,7 @@ class GradeForm extends React.Component {
               <i className='fas fa-list-alt' />
             </span>
           </div>
-          <input type='text' className='form-control' placeholder='Course' onChange={this.handleCourseInput}></input>
+          <input type='text' className='form-control' value={course}placeholder='Course' onChange={this.handleCourseInput}></input>
         </div>
         <div className='input-group mb-3'>
           <div className='input-group-prepend'>
@@ -70,7 +68,7 @@ class GradeForm extends React.Component {
               <i className='fas fa-graduation-cap' />
             </span>
           </div>
-          <input type='number' className='form-control' placeholder='Grade' onChange={this.handleGradeInput}></input>
+          <input type='number' className='form-control' value={grade} placeholder='Grade' onChange={this.handleGradeInput}></input>
         </div>
         <button type='submit' className='btn btn-success' id='addButton' onClick={this.handleClick}>Add</button>
         <button type='button' className='btn btn-light' id='cancelButton' onClick={this.resetFormFields}>Cancel</button>

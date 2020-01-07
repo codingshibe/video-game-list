@@ -53,6 +53,12 @@
       "course": "Hard Knocks",
       "grade": 70,
       "id": 9
+    },
+    {
+      "name": "Carmen Canlas",
+      "course": "Dance",
+      "grade": 95,
+      "id": 10
     }
   ]
 }
