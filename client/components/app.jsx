@@ -59,6 +59,25 @@ class App extends React.Component {
 
   }
 
+  deleteFromSGT(id) {
+    const config = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/grades/${id}`, config)
+      .then(data => {
+        return data.json();
+      })
+      .then(data => {
+        return data;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
   render() {
     return (
       <React.Fragment>
