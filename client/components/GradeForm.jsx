@@ -7,11 +7,36 @@ class GradeForm extends React.Component {
       name: '',
       course: '',
       grade: ''
+
     };
   }
 
   render() {
-    return null;
+    return (
+      <div>
+        <div className='input-group mb-3'>
+          <div className='input-group-prepend'>
+            <span className='input-group-text'>
+              <i className='fas fa-user' />
+            </span>
+          </div>
+        </div>
+        <div className='input-group mb-3'>
+          <div className='input-group-prepend'>
+            <span className='input-group-text'>
+              <i className='fas fa-list-alt' />
+            </span>
+          </div>
+        </div>
+        <div className='input-group mb-3'>
+          <div className='input-group-prepend'>
+            <span className='input-group-text'>
+              <i className='fas fa-graduation-cap' />
+            </span>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
