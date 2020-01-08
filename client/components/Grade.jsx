@@ -1,13 +1,16 @@
 import React from 'react';
 
-function Grade(props) {
-  return (
-    <tr>
-      <th scope="row">{props.name}</th>
-      <td>{props.course}</td>
-      <td>{props.grade}</td>
-    </tr>
-  );
+class Grade extends React.Component {
+  render() {
+    return (
+      <tr>
+        <td>{this.props.name}</td>
+        <td>{this.props.course}</td>
+        <td>{this.props.grade}</td>
+        <td><button type='button' className='btn btn-danger btn-sm'>Delete</button></td>
+      </tr>
+    );
+  }
 }
 
 export default Grade;

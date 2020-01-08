@@ -8,6 +8,7 @@ class App extends React.Component {
     super(props);
     this.state = { grades: [] };
     this.postToSGT = this.postToSGT.bind(this);
+    this.deleteFromSGT = this.deleteFromSGT.bind(this);
   }
 
   componentDidMount() {
@@ -71,7 +72,13 @@ class App extends React.Component {
         return data.json();
       })
       .then(data => {
-        return data;
+        const currentData = [...this.state.grades];
+        const idCheck = index => index.id === data.id;
+        const idToDelete = data.findIndex(idCheck);
+        if (idCheck !== -1) {
+          currentData.splice(idToDelete, 1);
+          this.setState({ grades: currentData });
+        }
       })
       .catch(err => {
         console.error(err);
