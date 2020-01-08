@@ -31,7 +31,7 @@ class App extends React.Component {
       for (let i = 0; i < grades.length; i++) {
         total += grades[i].grade;
       }
-      return total / grades.length;
+      return Math.ceil((total / grades.length));
     }
     return 0;
   }
@@ -96,7 +96,7 @@ class App extends React.Component {
           </div>
           <div className='row'>
             <div className='col-md-9'>
-              <GradeTable grades={this.state.grades} onDelete={this.deleteFromSGT}/>
+              <GradeTable grades={this.state.grades} deleteMethod={this.deleteFromSGT}/>
             </div>
             <div className='col-md-3'>
               <GradeForm onSubmit={this.postToSGT}/>

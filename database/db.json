@@ -1,12 +1,6 @@
 {
   "grades": [
     {
-      "id": 1,
-      "name": "Kyle Simpson",
-      "course": "JavaScript",
-      "grade": 100
-    },
-    {
       "id": 2,
       "name": "Brendan Eich",
       "course": "JavaScript",
