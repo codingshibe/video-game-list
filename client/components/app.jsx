@@ -96,7 +96,7 @@ class App extends React.Component {
           </div>
           <div className='row'>
             <div className='col-md-9'>
-              <GradeTable grades={this.state.grades} />
+              <GradeTable grades={this.state.grades} onDelete={this.deleteFromSGT}/>
             </div>
             <div className='col-md-3'>
               <GradeForm onSubmit={this.postToSGT}/>
