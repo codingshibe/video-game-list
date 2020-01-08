@@ -25,34 +25,22 @@
       "id": 5
     },
     {
-      "name": "Arturo Hernandez",
-      "course": "Chemistry",
-      "grade": 95,
-      "id": 6
-    },
-    {
-      "name": "Thomas Lane",
-      "course": "Accounting",
-      "grade": 95,
-      "id": 7
-    },
-    {
-      "name": "Blake Smith",
-      "course": "Networking",
-      "grade": 85,
-      "id": 8
-    },
-    {
       "name": "Chris Ward",
       "course": "Hard Knocks",
       "grade": 70,
       "id": 9
     },
     {
-      "name": "Carmen Canlas",
-      "course": "Dance",
+      "name": "Thomas Lane",
+      "course": "Accounting",
       "grade": 95,
       "id": 10
+    },
+    {
+      "name": "Arturo Hernandez",
+      "course": "Chemistry",
+      "grade": 92,
+      "id": 11
     }
   ]
 }

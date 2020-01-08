@@ -73,8 +73,8 @@ class App extends React.Component {
       })
       .then(data => {
         const currentData = [...this.state.grades];
-        const idCheck = index => index.id === data.id;
-        const idToDelete = data.findIndex(idCheck);
+        const idCheck = index => index.id === id;
+        const idToDelete = currentData.findIndex(idCheck);
         if (idCheck !== -1) {
           currentData.splice(idToDelete, 1);
           this.setState({ grades: currentData });
