@@ -90,15 +90,15 @@ class App extends React.Component {
       <React.Fragment>
         <div className='container'>
           <div className='row'>
-            <div className='col-md-12'>
+            <div className='col-xs-12 col-sm-12 col-md-12'>
               <Header average={this.calculateAverage()}/>
             </div>
           </div>
           <div className='row'>
-            <div className='col-md-9'>
+            <div className='col-xs-12 col-sm-12 col-md-9'>
               <GradeTable grades={this.state.grades} deleteMethod={this.deleteFromSGT}/>
             </div>
-            <div className='col-md-3'>
+            <div className='col-xs-12 col-sm-12 col-md-3'>
               <GradeForm onSubmit={this.postToSGT}/>
             </div>
 
