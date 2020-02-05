@@ -1,7 +1,7 @@
 {
-  "name": "sgt-react",
+  "name": "video-game-list",
   "version": "1.0.0",
-  "description": "The Student Grade Table: Written in React",
+  "description": "List of Video Games Owned: Utilizing React | Express | PostgreSQL",
   "main": "server/index.js",
   "scripts": {
     "client": "webpack-dev-server",
@@ -51,15 +51,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Learning-Fuze/sgt-react.git"
+    "url": "git+https://github.com/a-canlas/video-game-list.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Learning-Fuze/sgt-react/issues"
+    "url": "https://github.com/a-canlas/video-game-list/issues"
   },
-  "homepage": "https://github.com/Learning-Fuze/sgt-react#readme",
+  "homepage": "https://github.com/a-canlas/video-game-list#readme",
   "eslintIgnore": [
     "server/public/main.js"
   ],
