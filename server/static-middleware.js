@@ -1,5 +1,7 @@
-PORT = 3001
-DEV_SERVER_PORT = 3000
-DATABASE_URL = postgres://dev:lfz@localhost/nameOfDatabase
-SESSION_SECRET = secret
-SESSION_EXPIRY = 28800000
+const path = require('path');
+const express = require('express');
+
+const publicPath = path.join(__dirname, 'public/');
+const staticMiddlware = express.static(publicPath);
+
+module.exports = staticMiddlware;
