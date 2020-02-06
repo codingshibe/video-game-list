@@ -18,6 +18,17 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/grades', (req, res, next) => {
+  const sql = ' SELECT * from "grades"; ';
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.post('/api/grades', (req, res, next) => {
+  res.status(200).json();
+});
+
 app.use((err, req, res, next) => {
   if (err instanceof ClientError) {
     res.status(err.status).json({ error: err.message });
