@@ -26,7 +26,20 @@ app.get('/api/grades', (req, res, next) => {
 });
 
 app.post('/api/grades', (req, res, next) => {
-  res.status(200).json();
+  if (!req.body.name || !req.body.course || !req.body.grade) {
+    res.status(400).json({ error: 'Values cannot be empty' });
+  }
+  const grade = parseInt(req.body.grade);
+  if (grade < 0 || isNaN(grade)) {
+    res.status(400).json({ error: 'Grade must be positive integer' });
+  }
+  const sql = `INSERT into "grades" ("gradeId", name, course, grade)
+                            values  (default, $1, $2, $3)
+                            returning *;`;
+  const values = [req.body.name, req.body.course, grade];
+  db.query(sql, values)
+    .then(result => res.status(200).json(result.rows[0]))
+    .catch(err => next(err));
 });
 
 app.use((err, req, res, next) => {
