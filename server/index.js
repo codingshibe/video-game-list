@@ -30,8 +30,8 @@ app.get('/api/grades/:gradeId', (req, res, next) => {
     res.status(400).json({ error: 'Missing id ' });
   }
   const gradeId = parseInt(req.params.gradeId);
-  if (gradeId < 0 || isNaN(gradeId)) {
-    res.status(400).json({ error: 'id must be valid positive integer' });
+  if (gradeId < 1 || isNaN(gradeId)) {
+    res.status(400).json({ error: 'invalid id' });
   }
   const sql = `SELECT * FROM "grades"
                WHERE "gradeId" = $1;`;
@@ -57,6 +57,18 @@ app.post('/api/grades', (req, res, next) => {
   db.query(sql, values)
     .then(result => res.status(201).json(result.rows[0]))
     .catch(err => next(err));
+});
+
+app.delete('/api/grades/:gradeId', (req, res, next) => {
+  if (!req.params.gradeId) {
+    res.status(400).json({ error: 'Missing id' });
+  }
+  const gradeId = parseInt(req.params.gradeId);
+  if (gradeId < 1 || isNaN(gradeId)) {
+    res.status(400).json({ error: 'invalid id' });
+  }
+  const sql = '';
+  const value = [gradeId];
 });
 
 app.use((err, req, res, next) => {
