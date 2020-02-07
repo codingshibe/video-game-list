@@ -6,7 +6,7 @@ class GradeTable extends React.Component {
   generateGradeRows() {
     const gradesList = this.props.grades;
     const gradeRows = gradesList.map(grade => {
-      return <Grade key={grade.id} studentId={grade.id} name={grade.name} course={grade.course} grade={grade.grade} onDelete={this.props.deleteMethod}/>;
+      return <Grade key={grade.gradeId} gradeId={grade.gradeId} name={grade.name} course={grade.course} grade={grade.grade} onDelete={this.props.deleteMethod}/>;
     });
     return gradeRows;
 
