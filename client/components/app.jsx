@@ -6,9 +6,13 @@ import GradeForm from './GradeForm';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { grades: [] };
+    this.state = {
+      grades: [],
+      currentId: null
+    };
     this.postToSGT = this.postToSGT.bind(this);
     this.deleteFromSGT = this.deleteFromSGT.bind(this);
+    this.populateForm = this.populateForm.bind(this);
   }
 
   componentDidMount() {
@@ -85,6 +89,10 @@ class App extends React.Component {
       });
   }
 
+  populateForm(id) {
+    this.setState({ currentId: id });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -96,7 +104,7 @@ class App extends React.Component {
           </div>
           <div className='row'>
             <div className='col-xs-12 col-sm-12 col-md-9'>
-              <GradeTable grades={this.state.grades} deleteMethod={this.deleteFromSGT}/>
+              <GradeTable grades={this.state.grades} deleteMethod={this.deleteFromSGT} populateForm={this.populateForm}/>
             </div>
             <div className='col-xs-12 col-sm-12 col-md-3'>
               <GradeForm onSubmit={this.postToSGT}/>
