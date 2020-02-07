@@ -65,6 +65,31 @@ app.post('/api/grades', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/grades/:gradeId', (req, res, next) => {
+  if (!req.body.grade) {
+    return next(new ClientError('Missing value for grade', 400));
+  }
+  if (!req.params.gradeId) {
+    return next(new ClientError('Missing id', 400));
+  }
+  const gradeId = parseInt(req.params.gradeId);
+  if (gradeId < 1 || isNaN(gradeId)) {
+    return next(new ClientError('Invalid id', 400));
+  }
+  const newGrade = parseInt(req.body.grade);
+  if (newGrade < 0 || isNaN(newGrade)) {
+    return next(new ClientError('Grade must be positive integer', 400));
+  }
+  const sql = `UPDATE "grades"
+                      SET grade = $2
+                      WHERE "gradeId" = $1
+                      returning *;`;
+  const values = [gradeId, newGrade];
+  db.query(sql, values)
+    .then(result => res.status(200).json(result.rows[0]))
+    .catch(err => next(err));
+});
+
 app.delete('/api/grades/:gradeId', (req, res, next) => {
   if (!req.params.gradeId) {
     return next(new ClientError('Missing id', 400));
