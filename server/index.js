@@ -27,28 +27,34 @@ app.get('/api/grades', (req, res, next) => {
 
 app.get('/api/grades/:gradeId', (req, res, next) => {
   if (!req.params.gradeId) {
-    res.status(400).json({ error: 'Missing id ' });
+    return next(new ClientError('Missing id', 400));
   }
   const gradeId = parseInt(req.params.gradeId);
   if (gradeId < 1 || isNaN(gradeId)) {
-    res.status(400).json({ error: 'invalid id' });
+    return next(new ClientError('Invalid id', 400));
   }
   const sql = `SELECT * FROM "grades"
                WHERE "gradeId" = $1;`;
   const value = [gradeId];
   db.query(sql, value)
-    .then(result => res.status(200).json(result.rows[0]))
+    .then(result => {
+      if (result.rows.length !== 0) {
+        res.status(200).json(result.rows[0]);
+      } else {
+        throw new ClientError(`Could not find "id" of ${gradeId}`, 404);
+      }
+    })
     .catch(err => next(err));
 
 });
 
 app.post('/api/grades', (req, res, next) => {
   if (!req.body.name || !req.body.course || !req.body.grade) {
-    res.status(400).json({ error: 'Values cannot be empty' });
+    return next(new ClientError('Values cannot be empty', 400));
   }
   const grade = parseInt(req.body.grade);
   if (grade < 0 || isNaN(grade)) {
-    res.status(400).json({ error: 'Grade must be positive integer' });
+    return next(new ClientError('grade must be positive integer', 400));
   }
   const sql = `INSERT into "grades" ("gradeId", name, course, grade)
                             VALUES  (default, $1, $2, $3)
@@ -61,14 +67,18 @@ app.post('/api/grades', (req, res, next) => {
 
 app.delete('/api/grades/:gradeId', (req, res, next) => {
   if (!req.params.gradeId) {
-    res.status(400).json({ error: 'Missing id' });
+    return next(new ClientError('Missing id', 400));
   }
   const gradeId = parseInt(req.params.gradeId);
   if (gradeId < 1 || isNaN(gradeId)) {
-    res.status(400).json({ error: 'invalid id' });
+    return next(new ClientError('Invalid id', 400));
   }
-  const sql = '';
+  const sql = `DELETE FROM "grades"
+                      WHERE "gradeId" = $1;`;
   const value = [gradeId];
+  db.query(sql, value)
+    .then(result => res.status(200).json(result.rows))
+    .catch(err => next(err));
 });
 
 app.use((err, req, res, next) => {
