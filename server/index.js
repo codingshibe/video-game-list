@@ -19,10 +19,27 @@ app.get('/api/health-check', (req, res, next) => {
 });
 
 app.get('/api/grades', (req, res, next) => {
-  const sql = ' SELECT * from "grades"; ';
+  const sql = ' SELECT * FROM "grades"; ';
   db.query(sql)
     .then(result => res.json(result.rows))
     .catch(err => next(err));
+});
+
+app.get('/api/grades/:gradeId', (req, res, next) => {
+  if (!req.params.gradeId) {
+    res.status(400).json({ error: 'Missing id ' });
+  }
+  const gradeId = parseInt(req.params.gradeId);
+  if (gradeId < 0 || isNaN(gradeId)) {
+    res.status(400).json({ error: 'id must be valid positive integer' });
+  }
+  const sql = `SELECT * FROM "grades"
+               WHERE "gradeId" = $1;`;
+  const value = [gradeId];
+  db.query(sql, value)
+    .then(result => res.status(200).json(result.rows[0]))
+    .catch(err => next(err));
+
 });
 
 app.post('/api/grades', (req, res, next) => {
@@ -34,11 +51,11 @@ app.post('/api/grades', (req, res, next) => {
     res.status(400).json({ error: 'Grade must be positive integer' });
   }
   const sql = `INSERT into "grades" ("gradeId", name, course, grade)
-                            values  (default, $1, $2, $3)
+                            VALUES  (default, $1, $2, $3)
                             returning *;`;
   const values = [req.body.name, req.body.course, grade];
   db.query(sql, values)
-    .then(result => res.status(200).json(result.rows[0]))
+    .then(result => res.status(201).json(result.rows[0]))
     .catch(err => next(err));
 });
 
