@@ -8,7 +8,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       grades: [],
-      currentId: null
+      currentId: null,
+      indexOfCurrentId: null
     };
     this.postToSGT = this.postToSGT.bind(this);
     this.deleteFromSGT = this.deleteFromSGT.bind(this);
@@ -77,9 +78,9 @@ class App extends React.Component {
       })
       .then(data => {
         const currentData = [...this.state.grades];
-        const idCheck = index => index.id === id;
+        const idCheck = index => index.gradeId === id;
         const idToDelete = currentData.findIndex(idCheck);
-        if (idCheck !== -1) {
+        if (idToDelete !== -1) {
           currentData.splice(idToDelete, 1);
           this.setState({ grades: currentData });
         }
@@ -91,6 +92,13 @@ class App extends React.Component {
 
   populateForm(id) {
     this.setState({ currentId: id });
+    const currentData = [...this.state.grades];
+    const idCheck = index => index.gradeId === id;
+    const idToUpdate = currentData.findIndex(idCheck);
+    if (idToUpdate !== -1) {
+      this.setState({ indexOfCurrentId: idToUpdate });
+    }
+
   }
 
   render() {
@@ -107,7 +115,7 @@ class App extends React.Component {
               <GradeTable grades={this.state.grades} deleteMethod={this.deleteFromSGT} populateForm={this.populateForm}/>
             </div>
             <div className='col-xs-12 col-sm-12 col-md-3'>
-              <GradeForm onSubmit={this.postToSGT}/>
+              <GradeForm onSubmit={this.postToSGT} selectedGrade={this.state.grades[this.state.indexOfCurrentId]}/>
             </div>
 
           </div>
