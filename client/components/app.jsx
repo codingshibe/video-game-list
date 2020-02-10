@@ -42,6 +42,9 @@ class App extends React.Component {
   }
 
   postToSGT(newStudent) {
+    if (!newStudent.name || !newStudent.course || !newStudent.grade) {
+      return;
+    }
     const config = {
       method: 'POST',
       body: JSON.stringify(newStudent),
