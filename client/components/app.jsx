@@ -6,9 +6,14 @@ import GradeForm from './GradeForm';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { grades: [] };
+    this.state = {
+      grades: [],
+      currentId: null,
+      indexOfCurrentId: null
+    };
     this.postToSGT = this.postToSGT.bind(this);
     this.deleteFromSGT = this.deleteFromSGT.bind(this);
+    this.populateForm = this.populateForm.bind(this);
   }
 
   componentDidMount() {
@@ -37,26 +42,56 @@ class App extends React.Component {
   }
 
   postToSGT(newStudent) {
-    const config = {
-      method: 'POST',
-      body: JSON.stringify(newStudent),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/grades', config)
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        const currentData = [...this.state.grades];
-        currentData.push(data);
-        this.setState({ grades: currentData });
+    if (!newStudent.name || !newStudent.course || !newStudent.grade) {
+      return;
+    }
+    if (!this.state.currentId) {
+      const config = {
+        method: 'POST',
+        body: JSON.stringify(newStudent),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch('/api/grades', config)
+        .then(data => {
+          return data.json();
+        })
+        .then(data => {
+          const currentData = [...this.state.grades];
+          currentData.push(data);
+          this.setState({ grades: currentData });
 
-      })
-      .catch(err => {
-        console.error(err);
-      });
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    } else {
+      const currentId = this.state.currentId;
+      const grade = { grade: newStudent.grade };
+      const config = {
+        method: 'PUT',
+        body: JSON.stringify(grade),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch(`/api/grades/${currentId}`, config)
+        .then(data => {
+          return data.json();
+        })
+        .then(data => {
+          const currentData = [...this.state.grades];
+          currentData[this.state.indexOfCurrentId].grade = data.grade;
+          this.setState({
+            grades: currentData,
+            currentId: null
+          });
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
 
   }
 
@@ -73,9 +108,9 @@ class App extends React.Component {
       })
       .then(data => {
         const currentData = [...this.state.grades];
-        const idCheck = index => index.id === id;
+        const idCheck = index => index.gradeId === id;
         const idToDelete = currentData.findIndex(idCheck);
-        if (idCheck !== -1) {
+        if (idToDelete !== -1) {
           currentData.splice(idToDelete, 1);
           this.setState({ grades: currentData });
         }
@@ -83,6 +118,17 @@ class App extends React.Component {
       .catch(err => {
         console.error(err);
       });
+  }
+
+  populateForm(id) {
+    this.setState({ currentId: id });
+    const currentData = [...this.state.grades];
+    const idCheck = index => index.gradeId === id;
+    const idToUpdate = currentData.findIndex(idCheck);
+    if (idToUpdate !== -1) {
+      this.setState({ indexOfCurrentId: idToUpdate });
+    }
+
   }
 
   render() {
@@ -96,10 +142,10 @@ class App extends React.Component {
           </div>
           <div className='row'>
             <div className='col-xs-12 col-sm-12 col-md-9'>
-              <GradeTable grades={this.state.grades} deleteMethod={this.deleteFromSGT}/>
+              <GradeTable grades={this.state.grades} deleteMethod={this.deleteFromSGT} populateForm={this.populateForm}/>
             </div>
             <div className='col-xs-12 col-sm-12 col-md-3'>
-              <GradeForm onSubmit={this.postToSGT}/>
+              <GradeForm onSubmit={this.postToSGT} selectedGrade={this.state.grades[this.state.indexOfCurrentId]}/>
             </div>
 
           </div>

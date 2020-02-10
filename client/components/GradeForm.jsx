@@ -16,6 +16,19 @@ class GradeForm extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedGrade !== prevProps.selectedGrade) {
+      const name = this.props.selectedGrade.name;
+      const course = this.props.selectedGrade.course;
+      const grade = this.props.selectedGrade.grade;
+      this.setState({
+        name: name,
+        course: course,
+        grade: grade
+      });
+    }
+  }
+
   handleNameInput(event) {
     this.setState({ name: event.target.value });
   }
