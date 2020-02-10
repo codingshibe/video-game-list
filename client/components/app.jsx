@@ -94,7 +94,8 @@ class App extends React.Component {
   }
 
   populateForm(id) {
-    this.setState({ currentId: id });
+    // const currentId = id;
+    // this.setState({ currentId: id });
     const currentData = [...this.state.grades];
     const idCheck = index => index.gradeId === id;
     const idToUpdate = currentData.findIndex(idCheck);
