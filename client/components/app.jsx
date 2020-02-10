@@ -81,7 +81,15 @@ class App extends React.Component {
           return data.json();
         })
         .then(data => {
-          return data;
+          const currentData = [...this.state.grades];
+          currentData[this.state.indexOfCurrentId].grade = data.grade;
+          this.setState({
+            grades: currentData,
+            currentId: null
+          });
+        })
+        .catch(err => {
+          console.error(err);
         });
     }
 
@@ -113,7 +121,6 @@ class App extends React.Component {
   }
 
   populateForm(id) {
-    const currentId = id;
     this.setState({ currentId: id });
     const currentData = [...this.state.grades];
     const idCheck = index => index.gradeId === id;
