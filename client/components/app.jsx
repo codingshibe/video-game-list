@@ -45,26 +45,45 @@ class App extends React.Component {
     if (!newStudent.name || !newStudent.course || !newStudent.grade) {
       return;
     }
-    const config = {
-      method: 'POST',
-      body: JSON.stringify(newStudent),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/grades', config)
-      .then(data => {
-        return data.json();
-      })
-      .then(data => {
-        const currentData = [...this.state.grades];
-        currentData.push(data);
-        this.setState({ grades: currentData });
+    if (!this.state.currentId) {
+      const config = {
+        method: 'POST',
+        body: JSON.stringify(newStudent),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch('/api/grades', config)
+        .then(data => {
+          return data.json();
+        })
+        .then(data => {
+          const currentData = [...this.state.grades];
+          currentData.push(data);
+          this.setState({ grades: currentData });
 
-      })
-      .catch(err => {
-        console.error(err);
-      });
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    } else {
+      const currentId = this.state.currentId;
+      const grade = { grade: newStudent.grade };
+      const config = {
+        method: 'PUT',
+        body: JSON.stringify(grade),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch(`/api/grades/${currentId}`, config)
+        .then(data => {
+          return data.json();
+        })
+        .then(data => {
+          return data;
+        });
+    }
 
   }
 
@@ -94,8 +113,8 @@ class App extends React.Component {
   }
 
   populateForm(id) {
-    // const currentId = id;
-    // this.setState({ currentId: id });
+    const currentId = id;
+    this.setState({ currentId: id });
     const currentData = [...this.state.grades];
     const idCheck = index => index.gradeId === id;
     const idToUpdate = currentData.findIndex(idCheck);
