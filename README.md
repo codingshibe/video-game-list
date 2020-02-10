@@ -1,91 +1,68 @@
-# sgt-react
+# Video Game List
 
-The Student Grade Table: Written in React
+A full stack application using all CRUD features to store all of the video games that you own/want
 
-## Introduction
+## Technologies Used
 
-For this project, you will be building a single-page React application that communicates with a server to manipulate data.
+- React.js
+- Webpack
+- Node.js / Express
+- PostgreSQL
+- Bootstrap 4
+- HTML5
+- CSS 3
+- AWS EC2
 
-## Getting Started
+## Live Demo
 
-1. Fork this repository to your GitHub account and clone it into the `lfz` directory on your local machine.
-1. Install all dependencies in `package.json` with NPM.
-    ```bash
-    npm install
-    ```
-
-## NPM Scripts
-
-- `dev` - Start Webpack Dev Server on port `3000` and JSON Server on port `3001`. (Go to `http://localhost:3000`)
-- `build` - Run Webpack to build the React client into `server/public`. (Usually only run during deployment)
+The application be found at [https://video-game-list.a-canlas.dev](https://video-game-list.a-canlas.dev)
 
 ## Features
 
-- [User can view all grades.](features/user-can-view-all-grades.md)
-- [User can view the average grade.](features/user-can-view-the-average-grade.md)
-- [User can add a grade.](features/user-can-add-a-grade.md)
-- [User can delete a grade.](features/user-can-delete-a-grade.md)
+- User can add a new video game to the table
+- User can view all video games in the table
+- User can delete a video game from the table
+- User can edit an entry in the table
 
 ## Preview
 
-![SGT React](sgt-react.gif)
+## Development
 
-## Server API
+### System Requirements
 
-#### `GET /api/grades`
+- NPM 6 or higher
+- Node.js 10 or higher
 
-Responds with all recorded `grades`.
+### Getting Started
 
-##### Example Response Body
+1. Clone the repository
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Scott Tolinski",
-    "grade": 100,
-    "course": "Web Development"
-  },
-  {
-    "id": 2,
-    "name": "Scott Bowler",
-    "grade": 100,
-    "course": "Web Development"
-  }
-]
+```shell
+git clone https://github.com/a-canlas/video-game-list.git
 ```
 
-#### `POST /api/grades`
+2. Install all npm dependencies
 
-Accepts a single `grade` object in the request body and inserts it into all `grades`. Responds with the inserted `grade`, including an auto-generated `id`.
-
-##### Example Request Body
-
-```json
-{
-  "name": "Tim Davis",
-  "grade": 40,
-  "course": "Web Development"
-}
+```shell
+npm install
 ```
 
-##### Example Response Body
+3. Import the example database
 
-```json
-{
-  "id": 3,
-  "name": "Tim Davis",
-  "grade": 40,
-  "course": "Web Development"
-}
+```shell
+npm run db:import
 ```
 
-#### `DELETE /api/grades/:id`
+4. Start the database
 
-Removes a `grade` from all recorded `grades`, given an `id` in the request URL. _e.g._ `/api/grades/3`
-
-##### Example Response Body
-
-```json
-{}
+```shell
+sudo service postgresql start
 ```
+
+5. Start the project
+
+```shell
+npm run dev
+```
+
+6. Go to localhost:3000 in your web browser
