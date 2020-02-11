@@ -90,17 +90,17 @@ app.put('/api/games/:gameId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.delete('/api/grades/:gradeId', (req, res, next) => {
-  if (!req.params.gradeId) {
+app.delete('/api/games/:gameId', (req, res, next) => {
+  if (!req.params.gameId) {
     return next(new ClientError('Missing id', 400));
   }
-  const gradeId = parseInt(req.params.gradeId);
-  if (gradeId < 1 || isNaN(gradeId)) {
+  const gameId = parseInt(req.params.gameId);
+  if (gameId < 1 || isNaN(gameId)) {
     return next(new ClientError('Invalid id', 400));
   }
-  const sql = `DELETE FROM "grades"
-                      WHERE "gradeId" = $1;`;
-  const value = [gradeId];
+  const sql = `DELETE FROM "games"
+                      WHERE "gameId" = $1;`;
+  const value = [gameId];
   db.query(sql, value)
     .then(result => res.status(200).json(result.rows))
     .catch(err => next(err));
