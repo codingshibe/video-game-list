@@ -48,18 +48,18 @@ app.get('/api/games/:gameId', (req, res, next) => {
 
 });
 
-app.post('/api/grades', (req, res, next) => {
-  if (!req.body.name || !req.body.course || !req.body.grade) {
+app.post('/api/games', (req, res, next) => {
+  if (!req.body.title || !req.body.platform || !req.body.price) {
     return next(new ClientError('Values cannot be empty', 400));
   }
-  const grade = parseInt(req.body.grade);
-  if (grade < 0 || isNaN(grade)) {
-    return next(new ClientError('grade must be positive integer', 400));
+  const price = parseInt(req.body.price);
+  if (price < 0 || isNaN(price)) {
+    return next(new ClientError('price must be positive integer', 400));
   }
-  const sql = `INSERT into "grades" ("gradeId", name, course, grade)
+  const sql = `INSERT into "games" ("gameId", title, platform, price)
                             VALUES  (default, $1, $2, $3)
                             returning *;`;
-  const values = [req.body.name, req.body.course, grade];
+  const values = [req.body.title, req.body.platform, price];
   db.query(sql, values)
     .then(result => res.status(201).json(result.rows[0]))
     .catch(err => next(err));
