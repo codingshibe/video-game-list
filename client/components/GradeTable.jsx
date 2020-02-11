@@ -4,11 +4,11 @@ import Grade from './Grade';
 class GradeTable extends React.Component {
 
   generateGradeRows() {
-    const gradesList = this.props.grades;
-    const gradeRows = gradesList.map(grade => {
-      return <Grade key={grade.gradeId} gradeId={grade.gradeId} name={grade.name} course={grade.course} grade={grade.grade} onDelete={this.props.deleteMethod} populateForm={this.props.populateForm}/>;
+    const gamesList = this.props.games;
+    const gameRows = gamesList.map(game => {
+      return <Grade key={game.gameId} gameId={game.gameId} title={game.title} platform={game.platform} price={game.price} onDelete={this.props.deleteMethod} populateForm={this.props.populateForm}/>;
     });
-    return gradeRows;
+    return gameRows;
 
   }
 
