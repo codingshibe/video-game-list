@@ -151,7 +151,7 @@ class App extends React.Component {
               <GradeTable games={this.state.games} deleteMethod={this.deleteFromVGL} populateForm={this.populateForm}/>
             </div>
             <div className='col-xs-12 col-sm-12 col-md-3'>
-              <GradeForm onSubmit={this.postToVGL} selectedGrade={this.state.games[this.state.indexOfCurrentId]}/>
+              <GradeForm onSubmit={this.postToVGL} selectedGame={this.state.games[this.state.indexOfCurrentId]}/>
             </div>
 
           </div>

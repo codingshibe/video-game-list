@@ -4,93 +4,93 @@ class GradeForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      course: '',
-      grade: ''
+      title: '',
+      platform: '',
+      price: ''
 
     };
-    this.handleNameInput = this.handleNameInput.bind(this);
-    this.handleCourseInput = this.handleCourseInput.bind(this);
-    this.handleGradeInput = this.handleGradeInput.bind(this);
+    this.handleTitleInput = this.handleTitleInput.bind(this);
+    this.handlePlatformInput = this.handlePlatformInput.bind(this);
+    this.handlePriceInput = this.handlePriceInput.bind(this);
     this.resetFormFields = this.resetFormFields.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.selectedGrade !== prevProps.selectedGrade) {
-      let name;
-      let course;
-      let grade;
-      if (this.props.selectedGrade) {
-        name = this.props.selectedGrade.name;
-        course = this.props.selectedGrade.course;
-        grade = this.props.selectedGrade.grade;
+    if (this.props.selectedGame !== prevProps.selectedGame) {
+      let title;
+      let platform;
+      let price;
+      if (this.props.selectedGame) {
+        title = this.props.selectedGame.title;
+        platform = this.props.selectedGame.platform;
+        price = this.props.selectedGame.price;
       } else {
-        name = '';
-        course = '';
-        grade = '';
+        title = '';
+        platform = '';
+        price = '';
       }
       this.setState({
-        name: name,
-        course: course,
-        grade: grade
+        title: title,
+        platform: platform,
+        price: price
       });
     }
   }
 
-  handleNameInput(event) {
-    this.setState({ name: event.target.value });
+  handleTitleInput(event) {
+    this.setState({ title: event.target.value });
   }
 
-  handleCourseInput(event) {
-    this.setState({ course: event.target.value });
+  handlePlatformInput(event) {
+    this.setState({ platform: event.target.value });
   }
 
-  handleGradeInput(event) {
-    this.setState({ grade: event.target.value });
+  handlePriceInput(event) {
+    this.setState({ price: event.target.value });
   }
 
   handleClick(event) {
     event.preventDefault();
-    const studentData = { name: this.state.name, course: this.state.course, grade: parseInt(this.state.grade) };
-    this.props.onSubmit(studentData);
+    const gameData = { title: this.state.title, platform: this.state.platform, price: parseInt(this.state.price) };
+    this.props.onSubmit(gameData);
     this.resetFormFields();
 
   }
 
   resetFormFields(event) {
-    this.setState({ name: '', course: '', grade: '' });
+    this.setState({ title: '', platform: '', price: '' });
   }
 
   render() {
-    const name = this.state.name;
-    const course = this.state.course;
-    const grade = this.state.grade;
+    const title = this.state.title;
+    const platform = this.state.platform;
+    const price = this.state.price;
     return (
       <form onSubmit={this.handleClick} onReset={this.resetFormFields}>
         <div className='input-group mb-3'>
           <div className='input-group-prepend'>
             <span className='input-group-text'>
-              <i className='fas fa-user' />
+              <i className='fas fa-gamepad' />
             </span>
           </div>
-          <input type='text' className='form-control' placeholder='Student Name' value={name}onChange={this.handleNameInput}></input>
+          <input type='text' className='form-control' placeholder='Game Title' value={title}onChange={this.handleTitleInput}></input>
         </div>
         <div className='input-group mb-3'>
           <div className='input-group-prepend'>
             <span className='input-group-text'>
-              <i className='fas fa-list-alt' />
+              <i className='fas fa-window-restore' />
             </span>
           </div>
-          <input type='text' className='form-control' value={course}placeholder='Course' onChange={this.handleCourseInput}></input>
+          <input type='text' className='form-control' value={platform}placeholder='Platform' onChange={this.handlePlatformInput}></input>
         </div>
         <div className='input-group mb-3'>
           <div className='input-group-prepend'>
             <span className='input-group-text'>
-              <i className='fas fa-graduation-cap' />
+              <i className='fas fa-money-bill-alt' />
             </span>
           </div>
-          <input type='number' className='form-control' value={grade} placeholder='Grade' onChange={this.handleGradeInput}></input>
+          <input type='number' className='form-control' value={price} placeholder='Price' onChange={this.handlePriceInput}></input>
         </div>
         <button type='submit' className='btn btn-success' id='addButton'>Add</button>
         <button type='reset' className='btn btn-light' id='cancelButton'>Cancel</button>
