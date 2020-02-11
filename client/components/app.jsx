@@ -7,22 +7,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grades: [],
+      games: [],
       currentId: null,
       indexOfCurrentId: null
     };
-    this.postToSGT = this.postToSGT.bind(this);
-    this.deleteFromSGT = this.deleteFromSGT.bind(this);
+    this.postToVGL = this.postToVGL.bind(this);
+    this.deleteFromVGL = this.deleteFromVGL.bind(this);
     this.populateForm = this.populateForm.bind(this);
   }
 
   componentDidMount() {
-    fetch('/api/grades/')
+    fetch('/api/games/')
       .then(data => {
         return data.json();
       })
       .then(data => {
-        this.setState({ grades: data });
+        this.setState({ games: data });
       })
       .catch(err => {
         console.error('There was an error: ', err);
@@ -30,37 +30,37 @@ class App extends React.Component {
   }
 
   calculateAverage() {
-    if (this.state.grades.length !== 0) {
-      const grades = this.state.grades;
+    if (this.state.games.length !== 0) {
+      const games = this.state.games;
       let total = 0;
-      for (let i = 0; i < grades.length; i++) {
-        total += grades[i].grade;
+      for (let i = 0; i < games.length; i++) {
+        total += games[i].price;
       }
-      return Math.ceil((total / grades.length));
+      return Math.ceil((total / games.length));
     }
     return 0;
   }
 
-  postToSGT(newStudent) {
-    if (!newStudent.name || !newStudent.course || !newStudent.grade) {
+  postToVGL(newGame) {
+    if (!newGame.title || !newGame.platform || !newGame.price) {
       return;
     }
     if (!this.state.currentId) {
       const config = {
         method: 'POST',
-        body: JSON.stringify(newStudent),
+        body: JSON.stringify(newGame),
         headers: {
           'Content-Type': 'application/json'
         }
       };
-      fetch('/api/grades', config)
+      fetch('/api/games', config)
         .then(data => {
           return data.json();
         })
         .then(data => {
-          const currentData = [...this.state.grades];
+          const currentData = [...this.state.games];
           currentData.push(data);
-          this.setState({ grades: currentData });
+          this.setState({ games: currentData });
 
         })
         .catch(err => {
@@ -68,23 +68,29 @@ class App extends React.Component {
         });
     } else {
       const currentId = this.state.currentId;
-      const grade = { grade: newStudent.grade };
+      const game = {
+        title: newGame.title,
+        platform: newGame.platform,
+        price: newGame.price
+      };
       const config = {
         method: 'PUT',
-        body: JSON.stringify(grade),
+        body: JSON.stringify(game),
         headers: {
           'Content-Type': 'application/json'
         }
       };
-      fetch(`/api/grades/${currentId}`, config)
+      fetch(`/api/games/${currentId}`, config)
         .then(data => {
           return data.json();
         })
         .then(data => {
-          const currentData = [...this.state.grades];
-          currentData[this.state.indexOfCurrentId].grade = data.grade;
+          const currentData = [...this.state.games];
+          currentData[this.state.indexOfCurrentId].title = data.title;
+          currentData[this.state.indexOfCurrentId].platform = data.platform;
+          currentData[this.state.indexOfCurrentId].price = data.price;
           this.setState({
-            grades: currentData,
+            games: currentData,
             currentId: null
           });
         })
@@ -95,24 +101,24 @@ class App extends React.Component {
 
   }
 
-  deleteFromSGT(id) {
+  deleteFromVGL(id) {
     const config = {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    fetch(`/api/grades/${id}`, config)
+    fetch(`/api/games/${id}`, config)
       .then(data => {
         return data.json();
       })
       .then(data => {
-        const currentData = [...this.state.grades];
-        const idCheck = index => index.gradeId === id;
+        const currentData = [...this.state.games];
+        const idCheck = index => index.gameId === id;
         const idToDelete = currentData.findIndex(idCheck);
         if (idToDelete !== -1) {
           currentData.splice(idToDelete, 1);
-          this.setState({ grades: currentData });
+          this.setState({ games: currentData });
         }
       })
       .catch(err => {
@@ -122,8 +128,8 @@ class App extends React.Component {
 
   populateForm(id) {
     this.setState({ currentId: id });
-    const currentData = [...this.state.grades];
-    const idCheck = index => index.gradeId === id;
+    const currentData = [...this.state.games];
+    const idCheck = index => index.gameId === id;
     const idToUpdate = currentData.findIndex(idCheck);
     if (idToUpdate !== -1) {
       this.setState({ indexOfCurrentId: idToUpdate });
@@ -142,10 +148,10 @@ class App extends React.Component {
           </div>
           <div className='row'>
             <div className='col-xs-12 col-sm-12 col-md-9'>
-              <GradeTable grades={this.state.grades} deleteMethod={this.deleteFromSGT} populateForm={this.populateForm}/>
+              <GradeTable games={this.state.games} deleteMethod={this.deleteFromVGL} populateForm={this.populateForm}/>
             </div>
             <div className='col-xs-12 col-sm-12 col-md-3'>
-              <GradeForm onSubmit={this.postToSGT} selectedGrade={this.state.grades[this.state.indexOfCurrentId]}/>
+              <GradeForm onSubmit={this.postToVGL} selectedGame={this.state.games[this.state.indexOfCurrentId]}/>
             </div>
 
           </div>

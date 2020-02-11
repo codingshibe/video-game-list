@@ -3,31 +3,31 @@ import Grade from './Grade';
 
 class GradeTable extends React.Component {
 
-  generateGradeRows() {
-    const gradesList = this.props.grades;
-    const gradeRows = gradesList.map(grade => {
-      return <Grade key={grade.gradeId} gradeId={grade.gradeId} name={grade.name} course={grade.course} grade={grade.grade} onDelete={this.props.deleteMethod} populateForm={this.props.populateForm}/>;
+  generateGameRows() {
+    const gamesList = this.props.games;
+    const gameRows = gamesList.map(game => {
+      return <Grade key={game.gameId} gameId={game.gameId} title={game.title} platform={game.platform} price={game.price} onDelete={this.props.deleteMethod} populateForm={this.props.populateForm}/>;
     });
-    return gradeRows;
+    return gameRows;
 
   }
 
   checkForEmptyData() {
-    const gradesList = this.props.grades;
-    if (gradesList.length === 0) {
-      return <div>There are no records to display</div>;
+    const gamesList = this.props.games;
+    if (gamesList.length === 0) {
+      return <div>There are no games to display</div>;
     }
     return (
       <table className='table table-striped'>
         <thead>
           <tr>
-            <th scope='col'>Student Name</th>
-            <th scope='col'>Course</th>
-            <th scope='col'>Grade</th>
+            <th scope='col'>Title</th>
+            <th scope='col'>Platform</th>
+            <th scope='col'>Price</th>
           </tr>
         </thead>
         <tbody>
-          {this.generateGradeRows()}
+          {this.generateGameRows()}
         </tbody>
       </table>
     );
