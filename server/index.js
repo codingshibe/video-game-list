@@ -18,30 +18,30 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/grades', (req, res, next) => {
-  const sql = ' SELECT * FROM "grades"; ';
+app.get('/api/games', (req, res, next) => {
+  const sql = ' SELECT * FROM "games"; ';
   db.query(sql)
-    .then(result => res.json(result.rows))
+    .then(result => res.status(200).json(result.rows))
     .catch(err => next(err));
 });
 
-app.get('/api/grades/:gradeId', (req, res, next) => {
-  if (!req.params.gradeId) {
+app.get('/api/games/:gameId', (req, res, next) => {
+  if (!req.params.gameId) {
     return next(new ClientError('Missing id', 400));
   }
-  const gradeId = parseInt(req.params.gradeId);
-  if (gradeId < 1 || isNaN(gradeId)) {
+  const gameId = parseInt(req.params.gameId);
+  if (gameId < 1 || isNaN(gameId)) {
     return next(new ClientError('Invalid id', 400));
   }
-  const sql = `SELECT * FROM "grades"
-               WHERE "gradeId" = $1;`;
-  const value = [gradeId];
+  const sql = `SELECT * FROM "games"
+               WHERE "gameId" = $1;`;
+  const value = [gameId];
   db.query(sql, value)
     .then(result => {
       if (result.rows.length !== 0) {
         res.status(200).json(result.rows[0]);
       } else {
-        throw new ClientError(`Could not find "id" of ${gradeId}`, 404);
+        throw new ClientError(`Could not find "id" of ${gameId}`, 404);
       }
     })
     .catch(err => next(err));
