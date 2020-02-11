@@ -18,9 +18,18 @@ class GradeForm extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.selectedGrade !== prevProps.selectedGrade) {
-      const name = this.props.selectedGrade.name;
-      const course = this.props.selectedGrade.course;
-      const grade = this.props.selectedGrade.grade;
+      let name;
+      let course;
+      let grade;
+      if (this.props.selectedGrade) {
+        name = this.props.selectedGrade.name;
+        course = this.props.selectedGrade.course;
+        grade = this.props.selectedGrade.grade;
+      } else {
+        name = '';
+        course = '';
+        grade = '';
+      }
       this.setState({
         name: name,
         course: course,
