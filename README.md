@@ -15,7 +15,7 @@ A full stack application using all CRUD features to store all of the video games
 
 ## Live Demo
 
-The application be found at [https://video-game-list.a-canlas.dev](https://video-game-list.a-canlas.dev)
+The application be found at [https://video-game-list.acanlas.dev](https://video-game-list.acanlas.dev)
 
 ## Features
 
