@@ -18,7 +18,7 @@ class GradeTable extends React.Component {
       return <div>There are no games to display</div>;
     }
     return (
-      <table className='table table-striped'>
+      <table className='table table-striped table-dark'>
         <thead>
           <tr>
             <th scope='col'>Title</th>

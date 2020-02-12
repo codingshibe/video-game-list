@@ -2,4 +2,19 @@
   /* font-family: 'Bungee Shade', cursive; */
   font-family: 'Slackey', cursive;
   color: rgb(128, 48, 169);
+  text-shadow: -1px 1px 0 white, 1px 1px 0 white, 1px -1px 0 white, -1px -1px 0 white;
+}
+
+#root, .container, form {
+  background-color: #343a40;
+}
+
+.average {
+  color: white;
+  text-shadow: -1px 1px 0 rgb(128, 48, 169), 1px 1px rgb(128, 48, 169), 1px -1px rgb(128, 48, 169), -1px -1px rgb(128, 48, 169);
+}
+
+.add-button {
+  background-color: rgb(139, 232, 58);
+  color: black;
 }

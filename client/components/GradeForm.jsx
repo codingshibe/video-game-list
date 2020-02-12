@@ -92,8 +92,7 @@ class GradeForm extends React.Component {
           </div>
           <input type='number' className='form-control' value={price} placeholder='Price' onChange={this.handlePriceInput}></input>
         </div>
-        <button type='submit' className='btn btn-success' id='addButton'>Add</button>
-        <button type='reset' className='btn btn-light' id='cancelButton'>Cancel</button>
+        <button type='submit' className='btn add-button' id='addButton'>Add</button> <button type='reset' className='btn btn-light' id='cancelButton'>Cancel</button>
       </form>
     );
   }
