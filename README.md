@@ -26,6 +26,9 @@ The application be found at [https://video-game-list.a-canlas.dev](https://video
 
 ## Preview
 
+![vgt demo]('vgt-demo.gif)
+![vgt demo]('vgt-demo1.gif)
+
 ## Development
 
 ### System Requirements
