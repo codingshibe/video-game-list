@@ -19,7 +19,7 @@ class GradeTable extends React.Component {
     }
     return (
       <div className="table-div">
-        <table className='table-striped table-dark'>
+        <table className='table table-striped table-dark'>
           <thead>
             <tr>
               <th>Title</th>

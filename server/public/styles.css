@@ -1,3 +1,7 @@
+#root{
+  height: 100vmin;
+}
+
 .headline {
   /* font-family: 'Bungee Shade', cursive; */
   font-family: 'Slackey', cursive;
@@ -13,4 +17,8 @@
 .add-button {
   background-color: rgb(139, 232, 58);
   color: black;
+}
+
+.header-div, .content-div, #root {
+  background-color: #343a40;
 }
