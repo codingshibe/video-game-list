@@ -18,3 +18,7 @@
   background-color: rgb(139, 232, 58);
   color: black;
 }
+
+.container {
+  height: 100vmin;
+}
