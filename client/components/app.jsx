@@ -91,7 +91,8 @@ class App extends React.Component {
           currentData[this.state.indexOfCurrentId].price = data.price;
           this.setState({
             games: currentData,
-            currentId: null
+            currentId: null,
+            indexOfCurrentId: null
           });
         })
         .catch(err => {
