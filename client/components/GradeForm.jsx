@@ -67,7 +67,7 @@ class GradeForm extends React.Component {
     const platform = this.state.platform;
     const price = this.state.price;
     return (
-      <div className="form-div">
+      <div className="form-div col-md-3">
         <form onSubmit={this.handleClick} onReset={this.resetFormFields}>
           <div className='input-group mb-3'>
             <div className='input-group-prepend'>
