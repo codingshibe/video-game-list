@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Grade extends React.Component {
+class Game extends React.Component {
   render() {
     return (
       <tr>
@@ -17,4 +17,4 @@ class Grade extends React.Component {
   }
 }
 
-export default Grade;
+export default Game;
