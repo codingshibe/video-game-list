@@ -18,18 +18,20 @@ class GradeTable extends React.Component {
       return <div>There are no games to display</div>;
     }
     return (
-      <table className='table table-striped table-dark'>
-        <thead>
-          <tr>
-            <th scope='col'>Title</th>
-            <th scope='col'>Platform</th>
-            <th scope='col'>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.generateGameRows()}
-        </tbody>
-      </table>
+      <div className="table-div col-md-9">
+        <table className='table table-striped table-dark'>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Platform</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.generateGameRows()}
+          </tbody>
+        </table>
+      </div>
     );
   }
 
