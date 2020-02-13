@@ -140,22 +140,16 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-xs-12 col-sm-12 col-md-12'>
-              <Header average={this.calculateAverage()}/>
-            </div>
-          </div>
-          <div className='row'>
-            <div className='col-xs-12 col-sm-12 col-md-9'>
-              <GradeTable games={this.state.games} deleteMethod={this.deleteFromVGL} populateForm={this.populateForm}/>
-            </div>
-            <div className='col-xs-12 col-sm-12 col-md-3'>
-              <GradeForm onSubmit={this.postToVGL} selectedGame={this.state.games[this.state.indexOfCurrentId]}/>
-            </div>
+        <Header average={this.calculateAverage()}/>
 
-          </div>
+        <div className='content-div d-flex flex-column-reverse flex-sm-column-reverse flex-md-row'>
+
+          <GradeTable games={this.state.games} deleteMethod={this.deleteFromVGL} populateForm={this.populateForm}/>
+
+          <GradeForm onSubmit={this.postToVGL} selectedGame={this.state.games[this.state.indexOfCurrentId]}/>
+
         </div>
+
       </React.Fragment>
     );
   }
