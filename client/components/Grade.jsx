@@ -8,7 +8,7 @@ class Grade extends React.Component {
         <td>{this.props.platform}</td>
         <td>{this.props.price}</td>
         <td>
-          <button type='button' className='btn btn-primary btn-sm' onClick={() => this.props.populateForm(this.props.gameId)}>Update</button> <button type='button' className='btn btn-danger btn-sm'
+          <button type='button' className='btn btn-primary btn-sm' onClick={() => this.props.populateForm(this.props.gameId)}><i className='fas fa-edit' /></button> <button type='button' className='btn btn-danger btn-sm'
             onClick={() => this.props.onDelete(this.props.gameId)}>
           X</button>
         </td>
