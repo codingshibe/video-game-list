@@ -1,12 +1,12 @@
 import React from 'react';
-import Grade from './Grade';
+import Game from './Game';
 
-class GradeTable extends React.Component {
+class GameTable extends React.Component {
 
   generateGameRows() {
     const gamesList = this.props.games;
     const gameRows = gamesList.map(game => {
-      return <Grade key={game.gameId} gameId={game.gameId} title={game.title} platform={game.platform} price={game.price} onDelete={this.props.deleteMethod} populateForm={this.props.populateForm}/>;
+      return <Game key={game.gameId} gameId={game.gameId} title={game.title} platform={game.platform} price={game.price} onDelete={this.props.deleteMethod} populateForm={this.props.populateForm}/>;
     });
     return gameRows;
 
@@ -41,4 +41,4 @@ class GradeTable extends React.Component {
     );
   }
 }
-export default GradeTable;
+export default GameTable;

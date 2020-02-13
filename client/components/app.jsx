@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
-import GradeTable from './GradeTable';
-import GradeForm from './GradeForm';
+import GameTable from './GameTable';
+import GameForm from './GameForm';
 
 class App extends React.Component {
   constructor(props) {
@@ -91,7 +91,8 @@ class App extends React.Component {
           currentData[this.state.indexOfCurrentId].price = data.price;
           this.setState({
             games: currentData,
-            currentId: null
+            currentId: null,
+            indexOfCurrentId: null
           });
         })
         .catch(err => {
@@ -144,9 +145,9 @@ class App extends React.Component {
 
         <div className='content-div d-flex flex-column-reverse flex-sm-column-reverse flex-md-row'>
 
-          <GradeTable games={this.state.games} deleteMethod={this.deleteFromVGL} populateForm={this.populateForm}/>
+          <GameTable games={this.state.games} deleteMethod={this.deleteFromVGL} populateForm={this.populateForm}/>
 
-          <GradeForm onSubmit={this.postToVGL} selectedGame={this.state.games[this.state.indexOfCurrentId]}/>
+          <GameForm onSubmit={this.postToVGL} selectedGame={this.state.games[this.state.indexOfCurrentId]}/>
 
         </div>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class GradeForm extends React.Component {
+class GameForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -100,4 +100,4 @@ class GradeForm extends React.Component {
   }
 }
 
-export default GradeForm;
+export default GameForm;
