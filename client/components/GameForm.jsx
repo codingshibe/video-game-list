@@ -56,7 +56,8 @@ class GameForm extends React.Component {
   handleClick(event) {
     event.preventDefault();
     const gameData = { title: this.state.title, platform: this.state.platform, price: parseInt(this.state.price) };
-    if (this.validation(gameData)) {
+    const isValid = this.validation(gameData);
+    if (isValid) {
       this.props.onSubmit(gameData);
       this.resetFormFields();
     }
@@ -64,8 +65,25 @@ class GameForm extends React.Component {
   }
 
   validation(formValues) {
-    if (formValues.title && formValues.platform && formValues.price && formValues.price.length <= 4) {
+    if (formValues.title && formValues.platform && formValues.price && formValues.price <= 2000 && formValues.price > 0) {
       return true;
+    } else {
+      if (!formValues.title) {
+        this.setState({ titleError: 'Required field' });
+      }
+      if (!formValues.platform) {
+        this.setState({ platformError: 'Required field' });
+      }
+      if (!formValues.price) {
+        this.setState({ priceError: 'Required field' });
+      }
+      if (formValues.price < 0) {
+        this.setState({ priceError: 'Price must be a positive integer' });
+      }
+      if (formValues.price > 2000) {
+        this.setState({ priceError: 'Price must be less than 2000' });
+      }
+      return false;
     }
   }
 
