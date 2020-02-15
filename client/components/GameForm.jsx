@@ -6,7 +6,10 @@ class GameForm extends React.Component {
     this.state = {
       title: '',
       platform: '',
-      price: ''
+      price: '',
+      titleError: '',
+      platformError: '',
+      priceError: ''
 
     };
     this.handleTitleInput = this.handleTitleInput.bind(this);
@@ -53,23 +56,30 @@ class GameForm extends React.Component {
   handleClick(event) {
     event.preventDefault();
     const gameData = { title: this.state.title, platform: this.state.platform, price: parseInt(this.state.price) };
-    this.props.onSubmit(gameData);
-    this.resetFormFields();
+    if (this.validation(gameData)) {
+      this.props.onSubmit(gameData);
+      this.resetFormFields();
+    }
 
   }
 
   validation(formValues) {
-
+    if (formValues.title && formValues.platform && formValues.price && formValues.price.length <= 4) {
+      return true;
+    }
   }
 
   resetFormFields(event) {
-    this.setState({ title: '', platform: '', price: '' });
+    this.setState({ title: '', platform: '', price: '', titleError: '', platformError: '', priceError: '' });
   }
 
   render() {
     const title = this.state.title;
     const platform = this.state.platform;
     const price = this.state.price;
+    const titleError = this.state.titleError;
+    const platformError = this.state.platformError;
+    const priceError = this.state.priceError;
     return (
       <div className="form-div col-md-3">
         <form onSubmit={this.handleClick} onReset={this.resetFormFields}>
@@ -81,7 +91,7 @@ class GameForm extends React.Component {
             </div>
             <input type='text' className='form-control' placeholder='Game Title' value={title}onChange={this.handleTitleInput}></input>
           </div>
-          <small className="ml-5">hello</small>
+          <small className="ml-5">{titleError}</small>
           <div className='input-group mt-2'>
             <div className='input-group-prepend'>
               <span className='input-group-text'>
@@ -90,7 +100,7 @@ class GameForm extends React.Component {
             </div>
             <input type='text' className='form-control' value={platform}placeholder='Platform' onChange={this.handlePlatformInput}></input>
           </div>
-          <small className="ml-5">hello</small>
+          <small className="ml-5">{platformError}</small>
           <div className='input-group mt-2'>
             <div className='input-group-prepend'>
               <span className='input-group-text'>
@@ -99,7 +109,7 @@ class GameForm extends React.Component {
             </div>
             <input type='number' className='form-control' value={price} placeholder='Price' onChange={this.handlePriceInput}></input>
           </div>
-          <small className='ml-5 mb-3'>hello</small>
+          <small className='ml-5 mb-3'>{priceError}</small>
           <div className="input-group mt-1 mb-3">
             <button type='submit' className='btn add-button' id='addButton'>Add</button> <button type='reset' className='btn btn-light ml-1' id='cancelButton'>Cancel</button>
           </div>
