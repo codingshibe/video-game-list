@@ -65,7 +65,7 @@ class GameForm extends React.Component {
   }
 
   validation(formValues) {
-    if (formValues.title && formValues.platform && formValues.price && formValues.price <= 2000 && formValues.price > 0) {
+    if (formValues.title && formValues.platform && formValues.price && formValues.price <= 2000 && formValues.price >= 0) {
       return true;
     } else {
       if (!formValues.title) {
