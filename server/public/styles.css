@@ -21,3 +21,8 @@
 .header-div, .content-div, #root {
   background-color: #343a40;
 }
+
+small {
+  color: rgb(255, 47, 47);
+  font-weight: bold;
+}

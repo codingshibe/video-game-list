@@ -6,7 +6,10 @@ class GameForm extends React.Component {
     this.state = {
       title: '',
       platform: '',
-      price: ''
+      price: '',
+      titleError: '',
+      platformError: '',
+      priceError: ''
 
     };
     this.handleTitleInput = this.handleTitleInput.bind(this);
@@ -53,23 +56,52 @@ class GameForm extends React.Component {
   handleClick(event) {
     event.preventDefault();
     const gameData = { title: this.state.title, platform: this.state.platform, price: parseInt(this.state.price) };
-    this.props.onSubmit(gameData);
-    this.resetFormFields();
+    const isValid = this.validation(gameData);
+    if (isValid) {
+      this.props.onSubmit(gameData);
+      this.resetFormFields();
+    }
 
   }
 
+  validation(formValues) {
+    if (formValues.title && formValues.platform && formValues.price && formValues.price <= 2000 && formValues.price >= 0) {
+      return true;
+    } else {
+      if (!formValues.title) {
+        this.setState({ titleError: 'Required field' });
+      }
+      if (!formValues.platform) {
+        this.setState({ platformError: 'Required field' });
+      }
+      if (!formValues.price) {
+        this.setState({ priceError: 'Required field' });
+      }
+      if (formValues.price < 0) {
+        this.setState({ priceError: 'Price must be a positive integer' });
+      }
+      if (formValues.price > 2000) {
+        this.setState({ priceError: 'Price must be less than 2000' });
+      }
+      return false;
+    }
+  }
+
   resetFormFields(event) {
-    this.setState({ title: '', platform: '', price: '' });
+    this.setState({ title: '', platform: '', price: '', titleError: '', platformError: '', priceError: '' });
   }
 
   render() {
     const title = this.state.title;
     const platform = this.state.platform;
     const price = this.state.price;
+    const titleError = this.state.titleError;
+    const platformError = this.state.platformError;
+    const priceError = this.state.priceError;
     return (
       <div className="form-div col-md-3">
         <form onSubmit={this.handleClick} onReset={this.resetFormFields}>
-          <div className='input-group mb-3'>
+          <div className='input-group mt-2'>
             <div className='input-group-prepend'>
               <span className='input-group-text'>
                 <i className='fas fa-gamepad' />
@@ -77,7 +109,8 @@ class GameForm extends React.Component {
             </div>
             <input type='text' className='form-control' placeholder='Game Title' value={title}onChange={this.handleTitleInput}></input>
           </div>
-          <div className='input-group mb-3'>
+          <small className="ml-5">{titleError}</small>
+          <div className='input-group mt-2'>
             <div className='input-group-prepend'>
               <span className='input-group-text'>
                 <i className='fas fa-window-restore' />
@@ -85,7 +118,8 @@ class GameForm extends React.Component {
             </div>
             <input type='text' className='form-control' value={platform}placeholder='Platform' onChange={this.handlePlatformInput}></input>
           </div>
-          <div className='input-group mb-3'>
+          <small className="ml-5">{platformError}</small>
+          <div className='input-group mt-2'>
             <div className='input-group-prepend'>
               <span className='input-group-text'>
                 <i className='fas fa-money-bill-alt' />
@@ -93,7 +127,10 @@ class GameForm extends React.Component {
             </div>
             <input type='number' className='form-control' value={price} placeholder='Price' onChange={this.handlePriceInput}></input>
           </div>
-          <button type='submit' className='btn add-button' id='addButton'>Add</button> <button type='reset' className='btn btn-light' id='cancelButton'>Cancel</button>
+          <small className='ml-5 mb-3'>{priceError}</small>
+          <div className="input-group mt-1 mb-3">
+            <button type='submit' className='btn add-button' id='addButton'>Add</button> <button type='reset' className='btn btn-light ml-1' id='cancelButton'>Cancel</button>
+          </div>
         </form>
       </div>
     );
