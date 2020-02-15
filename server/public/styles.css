@@ -1,5 +1,6 @@
-#root{
-  height: 100vmin;
+body {
+  height: 100vh;
+  background-color: #343a40;
 }
 
 .headline {
@@ -16,10 +17,6 @@
 .add-button {
   background-color: rgb(139, 232, 58);
   color: black;
-}
-
-.header-div, .content-div, #root {
-  background-color: #343a40;
 }
 
 small {
