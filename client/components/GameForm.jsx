@@ -58,6 +58,10 @@ class GameForm extends React.Component {
 
   }
 
+  validation(formValues) {
+
+  }
+
   resetFormFields(event) {
     this.setState({ title: '', platform: '', price: '' });
   }
@@ -69,7 +73,7 @@ class GameForm extends React.Component {
     return (
       <div className="form-div col-md-3">
         <form onSubmit={this.handleClick} onReset={this.resetFormFields}>
-          <div className='input-group mb-3'>
+          <div className='input-group mt-2'>
             <div className='input-group-prepend'>
               <span className='input-group-text'>
                 <i className='fas fa-gamepad' />
@@ -77,7 +81,8 @@ class GameForm extends React.Component {
             </div>
             <input type='text' className='form-control' placeholder='Game Title' value={title}onChange={this.handleTitleInput}></input>
           </div>
-          <div className='input-group mb-3'>
+          <small className="ml-5">hello</small>
+          <div className='input-group mt-2'>
             <div className='input-group-prepend'>
               <span className='input-group-text'>
                 <i className='fas fa-window-restore' />
@@ -85,7 +90,8 @@ class GameForm extends React.Component {
             </div>
             <input type='text' className='form-control' value={platform}placeholder='Platform' onChange={this.handlePlatformInput}></input>
           </div>
-          <div className='input-group mb-3'>
+          <small className="ml-5">hello</small>
+          <div className='input-group mt-2'>
             <div className='input-group-prepend'>
               <span className='input-group-text'>
                 <i className='fas fa-money-bill-alt' />
@@ -93,7 +99,10 @@ class GameForm extends React.Component {
             </div>
             <input type='number' className='form-control' value={price} placeholder='Price' onChange={this.handlePriceInput}></input>
           </div>
-          <button type='submit' className='btn add-button' id='addButton'>Add</button> <button type='reset' className='btn btn-light' id='cancelButton'>Cancel</button>
+          <small className='ml-5 mb-3'>hello</small>
+          <div className="input-group mt-1 mb-3">
+            <button type='submit' className='btn add-button' id='addButton'>Add</button> <button type='reset' className='btn btn-light ml-1' id='cancelButton'>Cancel</button>
+          </div>
         </form>
       </div>
     );
