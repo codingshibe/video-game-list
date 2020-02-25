@@ -23,3 +23,7 @@ small {
   color: rgb(255, 47, 47);
   font-weight: bold;
 }
+
+.no-games {
+  color: white;
+}
