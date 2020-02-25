@@ -14,6 +14,10 @@ body {
   text-shadow: -1px 1px 0 rgb(128, 48, 169), 1px 1px rgb(128, 48, 169), 1px -1px rgb(128, 48, 169), -1px -1px rgb(128, 48, 169);
 }
 
+.average span {
+  text-shadow: none;
+}
+
 .add-button {
   background-color: rgb(139, 232, 58);
   color: black;
