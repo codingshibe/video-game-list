@@ -15,7 +15,9 @@ class GameTable extends React.Component {
   checkForEmptyData() {
     const gamesList = this.props.games;
     if (gamesList.length === 0) {
-      return <div>There are no games to display</div>;
+      return <div className="table-div col-md-9">
+        <p className="no-games ml-1">There are no games to display</p>
+      </div>;
     }
     return (
       <div className="table-div col-md-9">
